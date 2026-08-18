@@ -25,11 +25,25 @@ def divide(left: float, right: float) -> float:
     return left / right
 
 
+def power(left: float, right: float) -> float:
+    """Return the first number raised to the power of the second."""
+    return left**right
+
+
+def modulo(left: float, right: float) -> float:
+    """Return the remainder after dividing two numbers."""
+    if right == 0:
+        raise ValueError("Cannot perform modulo by zero")
+    return left % right
+
+
 OPERATIONS = {
     "add": add,
     "subtract": subtract,
     "multiply": multiply,
     "divide": divide,
+    "power": power,
+    "modulo": modulo,
 }
 
 
