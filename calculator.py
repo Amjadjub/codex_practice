@@ -1,5 +1,7 @@
 """A small calculator with a command-line interface."""
 
+from __future__ import annotations
+
 import argparse
 
 
@@ -37,6 +39,18 @@ def modulo(left: float, right: float) -> float:
     return left % right
 
 
+def parse_number(text: str) -> int | float:
+    """Parse an operand, keeping whole numbers as integers."""
+    try:
+        return int(text)
+    except ValueError:
+        pass
+    try:
+        return float(text)
+    except ValueError:
+        raise argparse.ArgumentTypeError(f"invalid number: {text!r}") from None
+
+
 OPERATIONS = {
     "add": add,
     "subtract": subtract,
@@ -50,8 +64,8 @@ OPERATIONS = {
 def main() -> None:
     parser = argparse.ArgumentParser(description="Perform a basic calculation.")
     parser.add_argument("operation", choices=OPERATIONS)
-    parser.add_argument("left", type=float)
-    parser.add_argument("right", type=float)
+    parser.add_argument("left", type=parse_number)
+    parser.add_argument("right", type=parse_number)
     args = parser.parse_args()
 
     try:
