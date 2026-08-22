@@ -1,0 +1,12 @@
+# Byte-compiled / cached files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Unit test / coverage artifacts
+.coverage
+.pytest_cache/
+
+# Virtual environments
+.venv/
+venv/

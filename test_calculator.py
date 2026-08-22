@@ -1,6 +1,7 @@
+import argparse
 import unittest
 
-from calculator import add, divide, modulo, multiply, power, subtract
+from calculator import add, divide, modulo, multiply, parse_number, power, subtract
 
 
 class CalculatorTests(unittest.TestCase):
@@ -29,6 +30,21 @@ class CalculatorTests(unittest.TestCase):
     def test_modulo_by_zero(self) -> None:
         with self.assertRaises(ValueError):
             modulo(10, 0)
+
+
+class ParseNumberTests(unittest.TestCase):
+    def test_whole_number_stays_an_integer(self) -> None:
+        self.assertIsInstance(parse_number("5"), int)
+
+    def test_negative_whole_number(self) -> None:
+        self.assertEqual(parse_number("-7"), -7)
+
+    def test_decimal_becomes_a_float(self) -> None:
+        self.assertEqual(parse_number("2.5"), 2.5)
+
+    def test_invalid_number(self) -> None:
+        with self.assertRaises(argparse.ArgumentTypeError):
+            parse_number("abc")
 
 
 if __name__ == "__main__":
